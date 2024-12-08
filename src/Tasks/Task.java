@@ -4,8 +4,7 @@ public class Task {
     private Integer id;
     private String name;
     private String description;
-    //private String taskStatus;
-
+    private TaskStatus status = TaskStatus.NEW;
 
     public Task(Integer id, String name, String description) {
         this.id = id;
@@ -13,11 +12,11 @@ public class Task {
         this.description = description;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -37,10 +36,21 @@ public class Task {
         this.description = description;
     }
 
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
+
+    public boolean isCompleted() {
+        return this.status == TaskStatus.DONE;
+    }
+
     @Override
-    public String toString (){
-        String result = "Task " + "{ id = " + getId() + "," + " name = " + getName() + "," +
-                         " description = " + getDescription() + " }";
-        return result;
+    public String toString() {
+        return "Task{" + " id = " + getId()  + ", name = " + getName() +
+                ", description = " + getDescription() + ", status = " + getStatus() + " }";
     }
 }

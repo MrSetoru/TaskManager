@@ -4,17 +4,31 @@ import Manager.TaskManager;
 
 public class Main {
     public static void main(String[] args) {
-        TaskManager taskManager = new TaskManager();
-        Task task1 = new Task(7, "Watch TV", "Easy time break");
-        Task createdTask = taskManager.createTask(task1);
-        Integer createdTaskId = createdTask.getId();
-        Task task2 = new Task(22, "Play computer Games", "Smoke and chill");
-        taskManager.createTask(task2);
-        task2 = taskManager.updateTask(task2);
+        TaskManager manager = new TaskManager();
+
+        Epic epic1 = new Epic(1,"Гараж", "Покупка");
+        manager.createTask(epic1);
+
+        Subtask subtask1 = new Subtask(2, "Цена", "Анализ рынка", epic1.getId());
+        Subtask subtask2 = new Subtask(3, "Документы", "Изучить вопрос", epic1.getId());
+        manager.createTask(subtask1);
+        manager.createTask(subtask2);
+        manager.addSubtaskToEpic(epic1.getId(), subtask1);
+        manager.addSubtaskToEpic(epic1.getId(), subtask2);
+
+        manager.deleteSubtask(subtask2.getId());
+        manager.updateSubtask(subtask1);
 
 
-        System.out.println(task1);
-        System.out.println(task2);
+        manager.findTaskById(subtask1.getId());
+        subtask1.setStatus(TaskStatus.DONE);
+        epic1.updateStatus();
+        manager.updateTask(subtask1);
+
+
+        System.out.println(epic1);
+
+
     }
 
 }
